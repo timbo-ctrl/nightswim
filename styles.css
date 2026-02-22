@@ -194,17 +194,6 @@ img { max-width: 100%; display: block; }
   height: 72px;
 }
 
-.nav-logo-img {
-  height: 24px;
-  width: auto;
-  opacity: 0.9;
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo);
-}
-
-.nav-logo:hover .nav-logo-img {
-  opacity: 1;
-  transform: scale(1.05);
-}
 
 .nav-links {
   display: flex;
