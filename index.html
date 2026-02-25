@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Nightswim — Venture Capital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-  <!-- Scroll progress -->
-  <div class="scroll-progress" id="scrollProgress"></div>
+
 
   <!-- Film grain -->
   <div class="grain"></div>
@@ -27,27 +30,7 @@
   <!-- Ripple canvas -->
   <canvas id="rippleCanvas"></canvas>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <div class="nav-links">
-        <a href="#philosophy" class="nav-link" data-section="philosophy"><span>Philosophy</span></a>
-        <a href="#contact" class="nav-link" data-section="contact"><span>Contact</span></a>
-      </div>
-      <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
 
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-inner">
-      <a href="#philosophy" class="mobile-link">Philosophy</a>
-      <a href="#contact" class="mobile-link">Contact</a>
-    </div>
-  </div>
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
@@ -59,15 +42,7 @@
       <div class="hero-tagline-wrap">
         <p class="hero-subtitle" data-split>VENTURES</p>
         <div class="hero-divider"><span></span></div>
-        <p class="hero-tagline" data-split>What happened to investors who actually build things?</p>
-      </div>
-    </div>
-    <div class="hero-scroll-cue" id="scrollCue">
-      <span>Scroll to explore</span>
-      <div class="scroll-arrow">
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
-          <path d="M8 0V22M8 22L1 15M8 22L15 15" stroke="white" stroke-width="1" stroke-opacity="0.5"/>
-        </svg>
+        <p class="hero-tagline" data-split>Capital for the obsessed, from the obsessed.</p>
       </div>
     </div>
     <!-- Water ripple surface -->
@@ -78,127 +53,55 @@
     <div class="hero-grid"></div>
   </section>
 
-  <!-- ========== STATS ========== -->
-  <section class="section stats-section" id="stats">
+  <!-- ========== MANIFESTO ========== -->
+  <section class="section manifesto" id="manifesto">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item reveal-stagger" data-index="0">
-          <span class="stat-number" data-count="15" data-suffix="+">0</span>
-          <span class="stat-label">Years Building Products</span>
-        </div>
-        <div class="stat-divider reveal-stagger" data-index="1"></div>
-        <div class="stat-item reveal-stagger" data-index="2">
-          <span class="stat-number" data-count="100" data-suffix="+">0</span>
-          <span class="stat-label">Products to Market</span>
-        </div>
-        <div class="stat-divider reveal-stagger" data-index="3"></div>
-        <div class="stat-item reveal-stagger" data-index="4">
-          <span class="stat-number" data-count="1" data-suffix="">0</span>
-          <span class="stat-label">Decision Maker</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PHILOSOPHY ========== -->
-  <section class="section philosophy" id="philosophy">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label reveal">Our Philosophy</span>
-        <h2 class="section-title reveal" data-split-lines>
-          We don't just write checks. We help in the trenches.
+      <div class="manifesto-content">
+        <h2 class="manifesto-text reveal" data-split-lines>
+          We've built brands and products loved by millions.
+        </h2>
+        <h2 class="manifesto-text dim reveal-delay-1" data-split-lines>
+          Now we fund founders<br>
+          obsessed with doing the<br>
+          same.
         </h2>
       </div>
-
-      <div class="beliefs-grid">
-        <article class="belief-card reveal-stagger" data-index="0">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">01</span>
-          <h3 class="belief-title">Founder-Led Investing</h3>
-          <p class="belief-text">The best investors have built things themselves. Real product experience, not theoretical knowledge.</p>
-        </article>
-
-        <article class="belief-card reveal-stagger" data-index="1">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">02</span>
-          <h3 class="belief-title">Personal Obsession</h3>
-          <p class="belief-text">The best products come from personal frustration. We back founders solving problems that kept them up at night.</p>
-        </article>
-
-        <article class="belief-card reveal-stagger" data-index="2">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">03</span>
-          <h3 class="belief-title">Medium Agnostic</h3>
-          <p class="belief-text">Physical and digital follow the same principles. Problem-solving matters more than the medium.</p>
-        </article>
-
-        <article class="belief-card reveal-stagger" data-index="3">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">04</span>
-          <h3 class="belief-title">Decisive Partnership</h3>
-          <p class="belief-text">One conversation, one decision-maker. A fast yes or respectful no. No multi-partner gauntlets.</p>
-        </article>
-
-        <article class="belief-card reveal-stagger" data-index="4">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">05</span>
-          <h3 class="belief-title">Brand as Multiplier</h3>
-          <p class="belief-text">Early-stage companies shouldn't treat branding as secondary. It's your most powerful competitive differentiator.</p>
-        </article>
-
-        <article class="belief-card reveal-stagger" data-index="5">
-          <div class="card-border-glow"></div>
-          <span class="belief-number">06</span>
-          <h3 class="belief-title">Seed Stage Focus</h3>
-          <p class="belief-text">The seed check matters most. Before traction, before polish. When conviction is everything.</p>
-        </article>
-      </div>
     </div>
   </section>
 
-  <!-- ========== MARQUEE ========== -->
-  <div class="marquee-section">
-    <div class="marquee marquee-forward">
-      <div class="marquee-track">
-        <span>Nightswim Ventures</span><span class="marquee-dot"></span>
-        <span>Founder-Led Capital</span><span class="marquee-dot"></span>
-        <span>Build &mdash; Invest &mdash; Repeat</span><span class="marquee-dot"></span>
-        <span>Nightswim Ventures</span><span class="marquee-dot"></span>
-        <span>Founder-Led Capital</span><span class="marquee-dot"></span>
-        <span>Build &mdash; Invest &mdash; Repeat</span><span class="marquee-dot"></span>
-        <span>Nightswim Ventures</span><span class="marquee-dot"></span>
-        <span>Founder-Led Capital</span><span class="marquee-dot"></span>
-        <span>Build &mdash; Invest &mdash; Repeat</span><span class="marquee-dot"></span>
+  <!-- ========== ACCELERATOR ========== -->
+  <section class="section accelerator" id="accelerator">
+    <div class="container">
+      <h2 class="accelerator-heading reveal" data-split-lines>Capital is the start.</h2>
+      <div class="accelerator-capabilities">
+        <div class="capability reveal-stagger" data-index="0">
+          <span class="capability-label">Brand</span>
+          <span class="capability-desc">Identity, positioning, and narrative through our studio, <a
+              href="https://200lab.dev" target="_blank" rel="noopener">200 LAB</a></span>
+        </div>
+        <div class="capability reveal-stagger" data-index="1">
+          <span class="capability-label">Product</span>
+          <span class="capability-desc">From concept through buildout and launch</span>
+        </div>
+        <div class="capability reveal-stagger" data-index="2">
+          <span class="capability-label">Strategy & Growth</span>
+          <span class="capability-desc">Go-to-market, marketing, and scale</span>
+        </div>
       </div>
+      <p class="accelerator-closing reveal-delay-2">When you take a check from Nightswim, you get a team that ships
+        alongside you.</p>
     </div>
-    <div class="marquee marquee-reverse">
-      <div class="marquee-track">
-        <span>Seed Stage</span><span class="marquee-dot"></span>
-        <span>Product Builders</span><span class="marquee-dot"></span>
-        <span>Obsession Driven</span><span class="marquee-dot"></span>
-        <span>Seed Stage</span><span class="marquee-dot"></span>
-        <span>Product Builders</span><span class="marquee-dot"></span>
-        <span>Obsession Driven</span><span class="marquee-dot"></span>
-        <span>Seed Stage</span><span class="marquee-dot"></span>
-        <span>Product Builders</span><span class="marquee-dot"></span>
-        <span>Obsession Driven</span><span class="marquee-dot"></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Portfolio section removed — moving to separate page -->
+  </section>
 
   <!-- ========== PULL QUOTE ========== -->
   <section class="section pull-quote" id="pullQuote">
     <div class="container">
       <blockquote class="big-quote">
-        <p class="big-quote-text" id="bigQuoteText">&ldquo;The best investors should have calloused hands&mdash;not just sharp spreadsheets.&rdquo;</p>
-        <cite class="reveal">Tim Yanchun, Managing Partner</cite>
+        <p class="big-quote-text" id="bigQuoteText">&ldquo;Selling the vision requires having one. We bet on the
+          obsessed.&rdquo;</p>
       </blockquote>
     </div>
   </section>
-
-  <!-- Founder section removed — moving to separate page -->
 
   <!-- ========== CONTACT ========== -->
   <section class="section contact" id="contact">
@@ -210,7 +113,9 @@
         <a href="mailto:decks@nightswim.vc" class="contact-cta magnetic reveal-delay-2">
           <span class="cta-text">SUBMIT YOUR DECK</span>
           <span class="cta-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" />
+            </svg>
           </span>
           <div class="cta-shimmer"></div>
         </a>
@@ -223,12 +128,13 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-left">
-          <span class="footer-logo">nightswim</span>
-          <span class="footer-copy">&copy; 2025 Nightswim Ventures</span>
+          <span class="footer-copy">&copy; 2026 Nightswim Ventures</span>
         </div>
         <a href="#hero" class="footer-back-top magnetic">
           <span>Back to top</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M12 5L5 12M12 5L19 12"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" />
+          </svg>
         </a>
       </div>
     </div>
@@ -236,4 +142,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

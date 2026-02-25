@@ -14,13 +14,6 @@
   function lerpScroll() {
     scrollY = window.scrollY;
     smoothY += (scrollY - smoothY) * scrollLerp;
-
-    // Update scroll progress bar
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-    const bar = document.getElementById('scrollProgress');
-    if (bar) bar.style.width = progress + '%';
-
     requestAnimationFrame(lerpScroll);
   }
   lerpScroll();
@@ -32,14 +25,9 @@
     // Activate mesh bg
     setTimeout(() => {
       document.getElementById('meshBg').classList.add('active');
-      document.getElementById('nav').classList.add('visible');
     }, 300);
 
     initWaterRipple();
-    initNavScroll();
-    initActiveNav();
-    initMobileMenu();
-    initSmoothAnchors();
     initRevealAnimations();
     initSplitText();
     initSplitLines();
@@ -51,7 +39,6 @@
     initCountUp();
     initTextScramble();
     initQuoteReveal();
-    initHorizontalScroll();
   });
 
   // =============================================
@@ -239,66 +226,8 @@
   // =============================================
   //  NAV
   // =============================================
-  function initNavScroll() {
-    const nav = document.getElementById('nav');
-    let ticking = false;
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          nav.classList.toggle('scrolled', window.scrollY > 60);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  }
 
-  function initActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const links = document.querySelectorAll('.nav-link[data-section]');
-
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          links.forEach(l => l.classList.toggle('active', l.dataset.section === entry.target.id));
-        }
-      });
-    }, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
-
-    sections.forEach(s => obs.observe(s));
-  }
-
-  function initMobileMenu() {
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('active');
-      menu.classList.toggle('active');
-      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-    });
-
-    menu.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => {
-        btn.classList.remove('active');
-        menu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-  function initSmoothAnchors() {
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
-        }
-      });
-    });
-  }
 
   // =============================================
   //  REVEAL ON SCROLL
@@ -498,32 +427,49 @@
   function initParallax() {
     const hero = document.querySelector('.hero-content');
     const grid = document.querySelector('.hero-grid');
-    const cue = document.querySelector('.hero-scroll-cue');
 
     if (!hero || window.innerWidth < 768) return;
 
-    let ticking = false;
+    let currentY = 0;
+    let currentOpacity = 1;
+    let targetY = 0;
+    let targetScale = 1;
+    let targetOpacity = 1;
+    let isHeroVisible = true;
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const sy = window.scrollY;
-          const vh = window.innerHeight;
+    // Only run when hero is near the viewport
+    const obs = new IntersectionObserver(entries => {
+      isHeroVisible = entries[0].isIntersecting;
+    }, { rootMargin: '200px' });
+    obs.observe(hero);
 
-          if (sy < vh * 1.2) {
-            const p = sy / vh;
-            hero.style.transform = `translateY(${sy * 0.4}px) scale(${1 - p * 0.1})`;
-            hero.style.opacity = 1 - p * 1.5;
-
-            if (grid) grid.style.transform = `translateY(${sy * 0.2}px)`;
-            if (cue) cue.style.opacity = Math.max(0, 1 - p * 4);
-          }
-
-          ticking = false;
-        });
-        ticking = true;
+    function updateParallax() {
+      if (!isHeroVisible) {
+        requestAnimationFrame(updateParallax);
+        return;
       }
-    });
+
+      const sy = window.scrollY;
+      const vh = window.innerHeight;
+
+      if (sy < vh * 1.2) {
+        const p = sy / vh;
+        targetY = sy * 0.4;
+        targetScale = 1 - p * 0.1;
+        targetOpacity = Math.max(0, 1 - p * 1.5);
+      }
+
+      currentY += (targetY - currentY) * 0.1;
+      currentOpacity += (targetOpacity - currentOpacity) * 0.1;
+
+      hero.style.transform = `translate3d(0, ${currentY}px, 0) scale(${targetScale})`;
+      hero.style.opacity = currentOpacity;
+
+      if (grid) grid.style.transform = `translate3d(0, ${sy * 0.2}px, 0)`;
+
+      requestAnimationFrame(updateParallax);
+    }
+    updateParallax();
   }
 
   // =============================================
@@ -664,48 +610,30 @@
     el.innerHTML = words.map(w => `<span class="quote-word">${w}</span>`).join(' ');
 
     const quoteWords = el.querySelectorAll('.quote-word');
+    let isQuoteVisible = false;
+
+    const quoteObs = new IntersectionObserver(entries => {
+      isQuoteVisible = entries[0].isIntersecting;
+    }, { rootMargin: '100px' });
+    quoteObs.observe(el);
 
     function updateQuote() {
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const start = vh * 0.85;
-      const end = vh * 0.25;
-      const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+      if (isQuoteVisible) {
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const start = vh * 0.85;
+        const end = vh * 0.25;
+        const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
 
-      const litCount = Math.floor(progress * quoteWords.length);
-      quoteWords.forEach((w, i) => {
-        w.classList.toggle('lit', i < litCount);
-      });
+        const litCount = Math.floor(progress * quoteWords.length);
+        quoteWords.forEach((w, i) => {
+          w.classList.toggle('lit', i < litCount);
+        });
+      }
 
       requestAnimationFrame(updateQuote);
     }
     updateQuote();
-  }
-
-  // =============================================
-  //  SCROLL-JACKED HORIZONTAL PORTFOLIO
-  // =============================================
-  function initHorizontalScroll() {
-    const wrapper = document.getElementById('portfolioScroll');
-    const track = document.getElementById('portfolioTrack');
-    if (!wrapper || !track) return;
-
-    function update() {
-      const rect = wrapper.getBoundingClientRect();
-      const wrapperHeight = wrapper.offsetHeight;
-      const scrollableDistance = wrapperHeight - window.innerHeight;
-      const trackWidth = track.scrollWidth - window.innerWidth;
-
-      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-        // How far through the pinned section we've scrolled (0 to 1)
-        const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
-        track.style.transform = `translateX(${-progress * trackWidth}px)`;
-      }
-
-      requestAnimationFrame(update);
-    }
-
-    update();
   }
 
 })();
