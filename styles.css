@@ -468,8 +468,10 @@ img {
   position: relative;
   margin-bottom: 40px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .logo-glow {
@@ -504,6 +506,17 @@ img {
   }
 }
 
+.hero-moon-img {
+  width: clamp(40px, 8vw, 70px);
+  height: auto;
+  position: relative;
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: logoEntrance 2s var(--ease-out-expo) forwards;
+  opacity: 0;
+  transform: scale(0.8) translateY(40px);
+}
+
 .hero-logo-img {
   width: clamp(340px, 55vw, 720px);
   height: auto;
@@ -521,6 +534,7 @@ img {
     transform: scale(1) translateY(0);
   }
 }
+
 .hero-tagline-wrap {
   opacity: 0;
   transform: scale(0.8) translateY(40px);
