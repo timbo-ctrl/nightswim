@@ -521,11 +521,10 @@ img {
     transform: scale(1) translateY(0);
   }
 }
-
 .hero-tagline-wrap {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 1.2s var(--ease-out-expo) 0.8s forwards;
+  transform: scale(0.8) translateY(40px);
+  animation: logoEntrance 2s var(--ease-out-expo) forwards;
   text-align: center;
   width: 100%;
 }
@@ -621,7 +620,7 @@ img {
 
 .hero-scroll-cue {
   position: absolute;
-  bottom: 32px;
+  bottom: 40px;
   left: 0;
   right: 0;
   display: flex;
@@ -630,6 +629,12 @@ img {
   gap: 12px;
   opacity: 0;
   animation: fadeUp 1s var(--ease-out-expo) 1.6s forwards;
+}
+
+@media (max-width: 768px) {
+  .hero-scroll-cue {
+    bottom: 90px;
+  }
 }
 
 .hero-scroll-cue span {
